@@ -101,7 +101,7 @@ class Board(object):
         return True
 
     def draw_preview(self):
-        for row in xrange(1, 3):
+        for row in range(1, 3):
             self.preview.insstr(row, 0, "        ",
                                 curses.color_pair(curses.COLOR_BLACK))
         for cord in self.next_piece.get_preview_cords():
@@ -121,7 +121,7 @@ class Board(object):
 
     def clear_full_rows(self):
         rows_cleared = 0
-        for row in xrange(self.height):
+        for row in range(self.height):
             if curses.COLOR_BLACK not in self.state[row]:
                 self.increase_total_rows_cleared()
                 rows_cleared += 1
@@ -129,7 +129,7 @@ class Board(object):
         self.draw_board()
         time.sleep(0.1)
         self.increase_score(1000 * rows_cleared * rows_cleared * self.speed)
-        for row in xrange(self.height):
+        for row in range(self.height):
             if curses.COLOR_BLACK not in self.state[row]:
                 del self.state[row]
                 self.state.insert(0, [curses.COLOR_BLACK] * self.width)
@@ -177,7 +177,7 @@ class Board(object):
                     p = self.get_piece()
                     if not p.draw():
                         break
-            elif c == curses.KEY_DOWN:
+            elif c == 456:
                 if not p.move_down():
                     self.clear_full_rows()
                     p = self.get_piece()
@@ -185,11 +185,11 @@ class Board(object):
                         break
             if c == ord('q'):
                 break
-            if c == curses.KEY_UP:
+            if c == 450:
                 p.rotate()
-            if c == curses.KEY_LEFT:
+            if c == 452:
                 p.move_left()
-            if c == curses.KEY_RIGHT:
+            if c == 454:
                 p.move_right()
             if c == ord(' '):
                 while p.move_down():
